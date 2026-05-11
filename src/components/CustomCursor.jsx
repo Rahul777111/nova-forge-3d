@@ -1,44 +1,54 @@
-﻿import React, { useEffect, useRef } from "react";
-import "./CustomCursor.css";
+import React, { useEffect, useRef, useState } from 'react';
+import './CustomCursor.css';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 export default function CustomCursor() {
-  const dotRef = useRef();
-  const ringRef = useRef();
-  const pos = useRef({ x: 0, y: 0 });
-  const ring = useRef({ x: 0, y: 0 });
-  const raf = useRef();
+  const cursorRef = useRef(null);
+  const dotRef = useRef(null);
+  const isMobile = useIsMobile();
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    const move = (e) => { pos.current = { x: e.clientX, y: e.clientY }; };
-    window.addEventListener("mousemove", move);
+    if (isMobile) return;
+    let rafId;
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let cx = mx, cy = my;
 
-    const addHover = () => {
-      document.querySelectorAll("a,button,.btn,.service-card,.pricing-card,.showcase__card").forEach(el => {
-        el.addEventListener("mouseenter", () => ringRef.current?.classList.add("cursor-ring--hover"));
-        el.addEventListener("mouseleave", () => ringRef.current?.classList.remove("cursor-ring--hover"));
-      });
-    };
-    setTimeout(addHover, 2500);
+    const onMove = (e) => { mx = e.clientX; my = e.clientY; };
+    const onLeave = () => setHidden(true);
+    const onEnter = () => setHidden(false);
 
     const loop = () => {
-      ring.current.x += (pos.current.x - ring.current.x) * 0.12;
-      ring.current.y += (pos.current.y - ring.current.y) * 0.12;
+      cx += (mx - cx) * 0.12;
+      cy += (my - cy) * 0.12;
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(${cx}px, ${cy}px)`;
+      }
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${pos.current.x}px,${pos.current.y}px)`;
+        dotRef.current.style.transform = `translate(${mx}px, ${my}px)`;
       }
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${ring.current.x}px,${ring.current.y}px)`;
-      }
-      raf.current = requestAnimationFrame(loop);
+      rafId = requestAnimationFrame(loop);
     };
-    raf.current = requestAnimationFrame(loop);
-    return () => { cancelAnimationFrame(raf.current); window.removeEventListener("mousemove", move); };
-  }, []);
+
+    document.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseleave', onLeave);
+    document.addEventListener('mouseenter', onEnter);
+    rafId = requestAnimationFrame(loop);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseleave', onLeave);
+      document.removeEventListener('mouseenter', onEnter);
+    };
+  }, [isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <>
-      <div ref={dotRef} className="cursor-dot" aria-hidden />
-      <div ref={ringRef} className="cursor-ring" aria-hidden />
+      <div ref={cursorRef} className={`custom-cursor ${hidden ? 'hidden' : ''}`} aria-hidden="true" />
+      <div ref={dotRef} className={`custom-cursor-dot ${hidden ? 'hidden' : ''}`} aria-hidden="true" />
     </>
   );
 }

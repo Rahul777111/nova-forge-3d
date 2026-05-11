@@ -1,43 +1,57 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
-import { ThemeProvider } from "./context/ThemeContext";
-import Navbar          from "./components/Navbar";
-import Hero            from "./components/Hero";
-import LoadingScreen   from "./components/LoadingScreen";
-import CustomCursor    from "./components/CustomCursor";
-import ScrollProgress  from "./components/ScrollProgress";
-import CookieBanner    from "./components/CookieBanner";
-import ShaderBackground from "./components/ShaderBackground";
-import ScrollJourney   from "./components/ScrollJourney";
-import BgBot           from "./components/BgBot";
-import CursorBot       from "./components/CursorBot";
-import "./App.css";
+import React, { useEffect, lazy, Suspense } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
+import { ThemeProvider } from './context/ThemeContext';
+import { useAppStore } from './store/appStore';
+import SEO            from './components/SEO';
+import Navbar         from './components/Navbar';
+import Hero           from './components/Hero';
+import LoadingScreen  from './components/LoadingScreen';
+import CustomCursor   from './components/CustomCursor';
+import ScrollProgress from './components/ScrollProgress';
+import CookieBanner   from './components/CookieBanner';
+import ShaderBackground from './components/ShaderBackground';
+import ScrollJourney  from './components/ScrollJourney';
+import BgBot          from './components/BgBot';
+import CursorBot      from './components/CursorBot';
+import SkeletonLoader from './components/SkeletonLoader';
+import './App.css';
 
-// Lazy-load everything below the fold
-const ScrollTicker    = lazy(() => import("./components/ScrollTicker"));
-const StatsBar        = lazy(() => import("./components/StatsBar"));
-const ProductShowcase = lazy(() => import("./components/ProductShowcase"));
-const Services        = lazy(() => import("./components/Services"));
-const TechStack       = lazy(() => import("./components/TechStack"));
-const CaseStudies     = lazy(() => import("./components/CaseStudies"));
-const Testimonials    = lazy(() => import("./components/Testimonials"));
-const Process         = lazy(() => import("./components/Process"));
-const Team            = lazy(() => import("./components/Team"));
-const BlogTeaser      = lazy(() => import("./components/BlogTeaser"));
-const FAQ             = lazy(() => import("./components/FAQ"));
-const Pricing         = lazy(() => import("./components/Pricing"));
-const Contact         = lazy(() => import("./components/Contact"));
-const Footer          = lazy(() => import("./components/Footer"));
-const ParticleGalaxy  = lazy(() => import("./components/ParticleGalaxy"));
-const ParticleMorph   = lazy(() => import("./components/ParticleMorph"));
+const ScrollTicker    = lazy(() => import('./components/ScrollTicker'));
+const StatsBar        = lazy(() => import('./components/StatsBar'));
+const ProductShowcase = lazy(() => import('./components/ProductShowcase'));
+const Services        = lazy(() => import('./components/Services'));
+const TechStack       = lazy(() => import('./components/TechStack'));
+const CaseStudies     = lazy(() => import('./components/CaseStudies'));
+const Testimonials    = lazy(() => import('./components/Testimonials'));
+const Process         = lazy(() => import('./components/Process'));
+const Team            = lazy(() => import('./components/Team'));
+const BlogTeaser      = lazy(() => import('./components/BlogTeaser'));
+const FAQ             = lazy(() => import('./components/FAQ'));
+const Pricing         = lazy(() => import('./components/Pricing'));
+const Contact         = lazy(() => import('./components/Contact'));
+const Footer          = lazy(() => import('./components/Footer'));
+const ParticleGalaxy  = lazy(() => import('./components/ParticleGalaxy'));
+const ParticleMorph   = lazy(() => import('./components/ParticleMorph'));
+
+const SectionSkeleton = () => <SkeletonLoader height="300px" borderRadius="0" />;
 
 function AppInner() {
-  const [loaded, setLoaded] = useState(false);
+  const { appLoaded, setAppLoaded } = useAppStore();
+
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 2200);
-    return () => clearTimeout(t);
-  }, []);
+    // Use real load detection instead of hardcoded timer
+    if (document.readyState === 'complete') {
+      const t = setTimeout(setAppLoaded, 400);
+      return () => clearTimeout(t);
+    }
+    const handler = () => { setTimeout(setAppLoaded, 400); };
+    window.addEventListener('load', handler);
+    return () => window.removeEventListener('load', handler);
+  }, [setAppLoaded]);
+
   return (
     <>
+      <SEO />
       <ShaderBackground />
       <ScrollJourney />
       <ScrollProgress />
@@ -45,12 +59,12 @@ function AppInner() {
       <CookieBanner />
       <BgBot />
       <CursorBot />
-      {!loaded && <LoadingScreen />}
-      <div className={`app ${loaded ? "app--visible" : ""}`}>
+      {!appLoaded && <LoadingScreen />}
+      <div className={`app ${appLoaded ? 'app--visible' : ''}`}>
         <Navbar />
         <main>
           <Hero />
-          <Suspense fallback={null}>
+          <Suspense fallback={<SectionSkeleton />}>
             <StatsBar />
             <ScrollTicker />
             <ProductShowcase />
@@ -68,7 +82,7 @@ function AppInner() {
             <Contact />
           </Suspense>
         </main>
-        <Suspense fallback={null}><Footer /></Suspense>
+        <Suspense fallback={<SectionSkeleton />}><Footer /></Suspense>
       </div>
     </>
   );
@@ -76,8 +90,10 @@ function AppInner() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <AppInner />
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider>
+        <AppInner />
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }

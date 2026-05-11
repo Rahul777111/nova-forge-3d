@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nova-forge-3d.vercel.app/sitemap.xml

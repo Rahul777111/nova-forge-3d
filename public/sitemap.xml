@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://nova-forge-3d.vercel.app/</loc><priority>1.0</priority></url>
+  <url><loc>https://nova-forge-3d.vercel.app/#services</loc><priority>0.8</priority></url>
+  <url><loc>https://nova-forge-3d.vercel.app/#pricing</loc><priority>0.8</priority></url>
+  <url><loc>https://nova-forge-3d.vercel.app/#contact</loc><priority>0.9</priority></url>
+  <url><loc>https://nova-forge-3d.vercel.app/#blog</loc><priority>0.7</priority></url>
+</urlset>
