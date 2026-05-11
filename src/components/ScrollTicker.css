@@ -1,0 +1,21 @@
+.ticker {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border-ticker);
+  border-bottom: 1px solid var(--border-ticker);
+  overflow: hidden;
+  background: var(--surface-ticker);
+  transition: background 0.4s, border-color 0.4s;
+}
+.ticker__track { overflow: hidden; }
+.ticker__inner { display: flex; white-space: nowrap; width: max-content; }
+.ticker__item {
+  display: inline-flex; align-items: center;
+  font-family: var(--font-display);
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-faint);
+  padding: 0 2.5rem;
+  transition: color 0.2s;
+}
+.ticker__item:hover { color: var(--accent); }
+.ticker__sep { margin-left: 2.5rem; color: var(--accent); opacity: 0.4; }

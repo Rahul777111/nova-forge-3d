@@ -1,0 +1,59 @@
+.morph {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 5vw;
+  gap: 2rem;
+}
+@media (max-width: 768px) {
+  .morph { grid-template-columns: 1fr; }
+  .morph__canvas { height: 55vw; min-height: 300px; }
+}
+.morph__canvas {
+  position: relative;
+  height: 80vh;
+  min-height: 500px;
+  z-index: 0;
+}
+.morph__canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+.morph__ui {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 0;
+}
+.morph__buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.morph__btn {
+  font-size: 0.8rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.7rem 1.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--process-body-bg);
+  color: var(--muted);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.morph__btn:hover {
+  border-color: var(--accent-color, var(--accent));
+  color: var(--text);
+  background: var(--section-tag-bg);
+  box-shadow: 0 0 18px var(--shadow-glow);
+}
+.morph__btn--active {
+  border-color: var(--accent-color, var(--accent)) !important;
+  color: var(--text) !important;
+  background: var(--section-tag-bg) !important;
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent-color, var(--accent)) 30%, transparent) !important;
+}

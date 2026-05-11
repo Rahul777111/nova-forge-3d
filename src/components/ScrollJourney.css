@@ -1,0 +1,11 @@
+.scroll-journey {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+}
+.scroll-journey canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
