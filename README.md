@@ -9,16 +9,15 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev)
 [![Three.js](https://img.shields.io/badge/Three.js-r184-000000?style=for-the-badge&logo=threedotjs)](https://threejs.org)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](./LICENSE)
 
 <br/>
 
-> ### 👉 I hand-coded every single line of this project myself.
-> No AI code generation. No copy-paste. Pure learning, pure grind.
+> **A concept company portal built to explore what modern frontend tech is truly capable of.**
+> Designed and developed by a student as a personal deep-dive project.
 
 <br/>
 
-**[🌐 View Live](https://nova-forge-3d.vercel.app/)** &nbsp;·&nbsp; **[📂 Browse Code](https://github.com/Rahul777111/nova-forge-3d)** &nbsp;·&nbsp; **[🧑‍💻 My Profile](https://github.com/Rahul777111)**
+**[🌐 View Live](https://nova-forge-3d.vercel.app/)** &nbsp;·&nbsp; **[📂 Source Code](https://github.com/Rahul777111/nova-forge-3d)** &nbsp;·&nbsp; **[🧑‍💻 My Profile](https://github.com/Rahul777111)**
 
 <br/>
 
@@ -28,16 +27,15 @@
 
 ## 🧠 About This Project
 
-I'm a **self-taught frontend developer** from India, and I built **Nova Forge 3D** entirely from scratch as a personal challenge — to see how far I could push the browser.
+**Nova Forge 3D** is a concept company portal for a fictional AI studio — built to demonstrate how a premium, immersive, and modern web experience can be crafted using today's frontend stack.
 
-This is a **concept company portal** for a fictional AI studio. I designed every component, wrote every shader, and animated every interaction by hand — learning as I built.
+This is a **student portfolio project** — focused on pushing creative and technical boundaries with 3D graphics, custom shaders, and polished UI.
 
-> *"What if an AI company had the most jaw-dropping website on the internet?"*
-> That question drove every decision in this project.
+> *"What if an AI company had the most impressive website on the internet?"*
 
 ---
 
-## ✨ What I Built
+## ✨ Features
 
 <table>
 <tr>
@@ -57,7 +55,7 @@ This is a **concept company portal** for a fictional AI studio. I designed every
 **UI & Animations**
 - ⚡ GPU particle galaxy + morph system
 - 🤖 Ambient floating AI orb (canvas 2D)
-- 🖱️ Lag-based cursor tooltip bot
+- 🖱️ Smooth cursor tooltip follower
 - 🎬 60fps Framer Motion entrances
 - ✍️ GSAP glitch text effects
 - 🧲 Magnetic hover buttons
@@ -101,7 +99,7 @@ This is a **concept company portal** for a fictional AI studio. I designed every
 │  3D Helpers   →  @react-three/drei              │
 │  Post FX      →  @react-three/postprocessing    │
 │  Animation    →  Framer Motion 12 + GSAP 3      │
-│  Shaders      →  Custom GLSL (hand-written)     │
+│  Shaders      →  Custom GLSL                    │
 │  Forms        →  EmailJS Browser                │
 │  Styling      →  Pure CSS + CSS custom props    │
 └─────────────────────────────────────────────────┘
@@ -120,11 +118,10 @@ nova-forge-3d/
 │   └── favicon.svg
 └── src/
     ├── 🏠 App.jsx              ← Root component
-    ├── 🎨 App.css              ← Global layout
     ├── 🎨 index.css            ← CSS design system
     ├── context/
     │   └── ThemeContext.jsx    ← Dark/light mode
-    └── components/             ← 30+ components
+    └── components/
         ├── Hero.jsx            ← GLSL liquid orb hero
         ├── ShaderBackground    ← Animated FBM noise BG
         ├── ScrollJourney       ← 3D scroll scene
@@ -132,9 +129,8 @@ nova-forge-3d/
         ├── ParticleGalaxy      ← GPU star particles
         ├── ParticleMorph       ← Morphing particle mesh
         ├── BgBot               ← Floating AI orb
-        ├── CursorBot           ← Cursor AI tooltip
+        ├── CursorBot           ← Cursor tooltip
         ├── Services            ← Service cards grid
-        ├── Pricing             ← Pricing tiers
         ├── Contact             ← EmailJS form
         └── ...18 more
 ```
@@ -144,18 +140,18 @@ nova-forge-3d/
 ## 🚀 Run Locally
 
 ```bash
-# 1. Clone
+# Clone
 git clone https://github.com/Rahul777111/nova-forge-3d.git
 cd nova-forge-3d
 
-# 2. Install
+# Install
 npm install
 
-# 3. Dev server
+# Dev server
 npm run dev
 # → http://localhost:5173
 
-# 4. Production build
+# Production build
 npm run build
 npm run preview
 ```
@@ -164,7 +160,7 @@ npm run preview
 
 ## 📬 Enable Contact Form
 
-Get free keys from [emailjs.com](https://www.emailjs.com/) and add to `src/components/Contact.jsx`:
+Get free keys from [emailjs.com](https://www.emailjs.com/) and update `src/components/Contact.jsx`:
 
 ```js
 const SERVICE_ID  = "your_service_id";
@@ -179,13 +175,11 @@ const PUBLIC_KEY  = "your_public_key";
 ```text
 Name     →  D L Narayana
 From     →  India 🇮🇳
-Role     →  Student & Self-taught Frontend Developer
+Role     →  Student & Frontend Developer
 Focus    →  3D Web, Creative UI, React Ecosystem
 ```
 
-I built this project purely through self-learning — MDN docs, Three.js docs, shader tutorials, and a lot of trial and error. Every component in this repo was written by hand, line by line.
-
-No frameworks were copy-pasted. No AI wrote the code. Just me, my editor, and a browser console full of errors that I fixed one by one. 💪
+I'm passionate about building visually rich web experiences. This project is part of my journey exploring advanced frontend development — 3D graphics, WebGL, real-time animations, and modern React architecture.
 
 ---
 
@@ -202,9 +196,9 @@ No frameworks were copy-pasted. No AI wrote the code. Just me, my editor, and a 
 
 <div align="center">
 
-### If this project impressed you, please drop a ⭐ — it genuinely motivates me!
+### If this project impressed you, a ⭐ means a lot!
 
-[![Star History](https://img.shields.io/github/stars/Rahul777111/nova-forge-3d?style=for-the-badge&color=a259ff&logo=github)](https://github.com/Rahul777111/nova-forge-3d/stargazers)
+[![Stars](https://img.shields.io/github/stars/Rahul777111/nova-forge-3d?style=for-the-badge&color=a259ff&logo=github)](https://github.com/Rahul777111/nova-forge-3d/stargazers)
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:a259ff,100:0a0f1a&height=100&section=footer" width="100%" />
 
