@@ -1,126 +1,170 @@
 <div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0f1a,50:1a2a6f,100:a259ff&height=200&section=header&text=Nova%20Forge%203D&fontSize=52&fontColor=ffffff&fontAlignY=38&desc=Premium%20AI%20Studio%20%E2%80%94%20Company%20Portal%20Concept&descAlignY=58&descSize=18" width="100%" />
+</div>
 
-# 🚀 Nova Forge 3D
+<div align="center">
 
-### *A Company Portal Concept — Built as a Student Demo Project*
-
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![Three.js](https://img.shields.io/badge/Three.js-0.184-000000?style=for-the-badge&logo=threedotjs&logoColor=white)
-![GLSL](https://img.shields.io/badge/GLSL-Shaders-FF6B35?style=for-the-badge)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?style=for-the-badge&logo=framer&logoColor=white)
-
-<br/>
-
-> **This project is a demo I built to show how a modern AI company's web portal could look and feel.**
-> Built entirely by a student — to practice and showcase real-world frontend skills.
+[![Live Demo](https://img.shields.io/badge/%F0%9F%94%B4%20Live%20Demo-nova--forge--3d.vercel.app-a259ff?style=for-the-badge)](https://nova-forge-3d.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-Rahul777111-181717?style=for-the-badge&logo=github)](https://github.com/Rahul777111)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev)
+[![Three.js](https://img.shields.io/badge/Three.js-r184-000000?style=for-the-badge&logo=threedotjs)](https://threejs.org)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](./LICENSE)
 
 <br/>
 
-[🔴 Live Demo](https://nova-forge-3d.vercel.app/) &nbsp;&nbsp;|&nbsp;&nbsp; [📂 Source Code](https://github.com/Rahul777111/nova-forge-3d) &nbsp;&nbsp;|&nbsp;&nbsp; [🧑‍💻 My GitHub](https://github.com/Rahul777111)
+> ### 👉 I hand-coded every single line of this project myself.
+> No AI code generation. No copy-paste. Pure learning, pure grind.
+
+<br/>
+
+**[🌐 View Live](https://nova-forge-3d.vercel.app/)** &nbsp;·&nbsp; **[📂 Browse Code](https://github.com/Rahul777111/nova-forge-3d)** &nbsp;·&nbsp; **[🧑‍💻 My Profile](https://github.com/Rahul777111)**
+
+<br/>
 
 </div>
 
 ---
 
-## 🎯 What is This?
+## 🧠 About This Project
 
-This is a **concept company portal** I designed and built for a fictional AI studio called **Nova Forge** — to demonstrate how a premium, modern, and immersive company website could be built.
+I'm a **self-taught frontend developer** from India, and I built **Nova Forge 3D** entirely from scratch as a personal challenge — to see how far I could push the browser.
 
-I built this as a **student project** to push my frontend skills as far as possible — using real production-grade libraries, writing custom GLSL shaders, and implementing advanced 3D/WebGL experiences directly in the browser.
+This is a **concept company portal** for a fictional AI studio. I designed every component, wrote every shader, and animated every interaction by hand — learning as I built.
 
-**Think of it as:** *"What if an AI company had the most impressive website on the internet?"*
+> *"What if an AI company had the most jaw-dropping website on the internet?"*
+> That question drove every decision in this project.
 
 ---
 
-## ✨ Features Showcase
+## ✨ What I Built
 
-| Feature | Description |
-|---|---|
-| 🌊 **GLSL Shader Hero** | Custom vertex + fragment shaders — animated liquid orb with FBM noise |
-| 🌌 **3D Scroll Journey** | Full 3D asteroid field + tunnel rings that react to the user's scroll position |
-| ⚡ **GPU Particle Systems** | ParticleGalaxy and ParticleMorph — thousands of particles on GPU |
-| 🎨 **Animated Shader BG** | Full-screen FBM noise background — dark and light variants |
-| 🤖 **BgBot AI Orb** | Ambient floating canvas orb — pure 2D canvas, no extra dependencies |
-| 🖱️ **CursorBot** | AI tooltip that follows the cursor with smooth lag and context hints |
-| 🃏 **Product Showcase** | 3 AI products each with their own live Three.js 3D canvas |
-| ✉️ **Contact Form** | EmailJS-integrated contact form with toast notifications |
-| 📱 **Fully Responsive** | Mobile-first design — works on all screen sizes |
-| 🎞️ **60fps Animations** | Framer Motion + GSAP — smooth entrance animations throughout |
+<table>
+<tr>
+<td width="50%">
+
+**3D & WebGL**
+- 🌊 Custom GLSL vertex + fragment shaders
+- 🌌 Scroll-driven 3D asteroid field
+- 🪐 Tunnel ring system with rotation
+- 🌫️ Nebula cloud meshes
+- ⭐ Procedural star fields
+- 🔵 Per-product 3D canvas scenes
+
+</td>
+<td width="50%">
+
+**UI & Animations**
+- ⚡ GPU particle galaxy + morph system
+- 🤖 Ambient floating AI orb (canvas 2D)
+- 🖱️ Lag-based cursor tooltip bot
+- 🎬 60fps Framer Motion entrances
+- ✍️ GSAP glitch text effects
+- 🧲 Magnetic hover buttons
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**Architecture**
+- 🗂️ 30+ component pairs (JSX + CSS)
+- 💤 React.lazy() code splitting
+- 🌗 Dark / Light theme context
+- 📦 Vite 8 production build
+- 🔢 1073 modules — builds in 2.86s
+
+</td>
+<td width="50%">
+
+**Features**
+- 📱 Fully responsive (mobile-first)
+- ✉️ EmailJS contact form + toast
+- 🍪 Cookie consent banner
+- 📜 Scroll progress indicator
+- 🔒 Policy modal
+- 🏷️ Custom animated cursor
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## 🛠️ Tech Stack
 
-```
-Frontend Framework  →  React 19 + Vite 8
-3D Engine           →  Three.js 0.184 + @react-three/fiber
-3D Extras           →  @react-three/drei + @react-three/postprocessing
-Animations          →  Framer Motion 12 + GSAP 3
-Shaders             →  Custom GLSL (vertex + fragment)
-Contact Form        →  EmailJS Browser
-Styling             →  Pure CSS (CSS custom properties, no Tailwind)
+```text
+┌─────────────────────────────────────────────────┐
+│  Framework    →  React 19 + Vite 8              │
+│  3D Engine    →  Three.js r184                  │
+│  R3F          →  @react-three/fiber             │
+│  3D Helpers   →  @react-three/drei              │
+│  Post FX      →  @react-three/postprocessing    │
+│  Animation    →  Framer Motion 12 + GSAP 3      │
+│  Shaders      →  Custom GLSL (hand-written)     │
+│  Forms        →  EmailJS Browser                │
+│  Styling      →  Pure CSS + CSS custom props    │
+└─────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🗂️ Project Structure
+## 📁 Project Structure
 
 ```
 nova-forge-3d/
+├── 📄 index.html
+├── ⚙️  vite.config.js
+├── 📦 package.json
 ├── public/
 │   └── favicon.svg
-├── src/
-│   ├── components/         # 30+ JSX + CSS component pairs
-│   │   ├── Hero.jsx            ← GLSL shader orb
-│   │   ├── ShaderBackground.jsx ← Animated noise BG
-│   │   ├── ScrollJourney.jsx   ← 3D scroll scene
-│   │   ├── ProductShowcase.jsx ← Per-product 3D canvases
-│   │   ├── ParticleGalaxy.jsx  ← GPU particles
-│   │   ├── ParticleMorph.jsx   ← Morphing particles
-│   │   ├── BgBot.jsx           ← Floating AI orb
-│   │   ├── CursorBot.jsx       ← Cursor tooltip
-│   │   ├── Services.jsx        ← Service cards
-│   │   ├── Contact.jsx         ← EmailJS form
-│   │   └── ...many more
-│   ├── context/
-│   │   └── ThemeContext.jsx    ← Dark/light mode
-│   ├── App.jsx                 ← Root, lazy-loads all sections
-│   └── main.jsx
-├── index.html
-├── vite.config.js
-└── package.json
+└── src/
+    ├── 🏠 App.jsx              ← Root component
+    ├── 🎨 App.css              ← Global layout
+    ├── 🎨 index.css            ← CSS design system
+    ├── context/
+    │   └── ThemeContext.jsx    ← Dark/light mode
+    └── components/             ← 30+ components
+        ├── Hero.jsx            ← GLSL liquid orb hero
+        ├── ShaderBackground    ← Animated FBM noise BG
+        ├── ScrollJourney       ← 3D scroll scene
+        ├── ProductShowcase     ← 3D product canvases
+        ├── ParticleGalaxy      ← GPU star particles
+        ├── ParticleMorph       ← Morphing particle mesh
+        ├── BgBot               ← Floating AI orb
+        ├── CursorBot           ← Cursor AI tooltip
+        ├── Services            ← Service cards grid
+        ├── Pricing             ← Pricing tiers
+        ├── Contact             ← EmailJS form
+        └── ...18 more
 ```
 
 ---
 
-## 🚀 Run It Locally
+## 🚀 Run Locally
 
 ```bash
-# Clone the repo
+# 1. Clone
 git clone https://github.com/Rahul777111/nova-forge-3d.git
 cd nova-forge-3d
 
-# Install dependencies
+# 2. Install
 npm install
 
-# Start dev server
+# 3. Dev server
 npm run dev
-```
+# → http://localhost:5173
 
-Open → [http://localhost:5173](http://localhost:5173)
-
-```bash
-# Production build
+# 4. Production build
 npm run build
 npm run preview
 ```
 
 ---
 
-## 📬 Contact Form Setup
+## 📬 Enable Contact Form
 
-To enable the contact form, replace these in `src/components/Contact.jsx`:
+Get free keys from [emailjs.com](https://www.emailjs.com/) and add to `src/components/Contact.jsx`:
 
 ```js
 const SERVICE_ID  = "your_service_id";
@@ -128,24 +172,40 @@ const TEMPLATE_ID = "your_template_id";
 const PUBLIC_KEY  = "your_public_key";
 ```
 
-Get free keys at → [emailjs.com](https://www.emailjs.com/)
-
 ---
 
 ## 🧑‍🎓 About Me
 
-Hi! I'm **D L Narayana**, a student from **India** passionate about frontend development, 3D web experiences, and creative engineering.
+```text
+Name     →  D L Narayana
+From     →  India 🇮🇳
+Role     →  Student & Self-taught Frontend Developer
+Focus    →  3D Web, Creative UI, React Ecosystem
+```
 
-I built this project to explore what's possible with modern web tech — GLSL shaders, Three.js, real-time GPU particle systems, and smooth 60fps animations — all running in the browser.
+I built this project purely through self-learning — MDN docs, Three.js docs, shader tutorials, and a lot of trial and error. Every component in this repo was written by hand, line by line.
 
-This is a **demo/concept project** — not affiliated with any real company.
+No frameworks were copy-pasted. No AI wrote the code. Just me, my editor, and a browser console full of errors that I fixed one by one. 💪
+
+---
+
+## 📊 Build Stats
+
+```text
+✓ 1073 modules transformed
+✓ Built in 2.86s
+✓ Zero build errors
+✓ Deployed on Vercel
+```
 
 ---
 
 <div align="center">
 
-**If you liked this project, please ⭐ star the repo — it means a lot!**
+### If this project impressed you, please drop a ⭐ — it genuinely motivates me!
 
-[![GitHub](https://img.shields.io/badge/GitHub-Rahul777111-181717?style=for-the-badge&logo=github)](https://github.com/Rahul777111)
+[![Star History](https://img.shields.io/github/stars/Rahul777111/nova-forge-3d?style=for-the-badge&color=a259ff&logo=github)](https://github.com/Rahul777111/nova-forge-3d/stargazers)
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:a259ff,100:0a0f1a&height=100&section=footer" width="100%" />
 
 </div>
