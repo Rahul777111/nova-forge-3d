@@ -39,7 +39,6 @@ function AppInner() {
   const { appLoaded, setAppLoaded } = useAppStore();
 
   useEffect(() => {
-    // Use real load detection instead of hardcoded timer
     if (document.readyState === 'complete') {
       const t = setTimeout(setAppLoaded, 400);
       return () => clearTimeout(t);

@@ -1,31 +1,36 @@
-.contact { padding: 8rem 4rem; }
-.contact__inner { max-width: 720px; margin: 0 auto; }
-.contact__form { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 1rem; }
-.contact__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.contact { padding: 8rem 2rem; }
+.contact__inner { max-width: 800px; margin: 0 auto; }
+.contact__form { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
+.contact__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .contact__field { display: flex; flex-direction: column; gap: 0.5rem; }
-.contact__field label {
-  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em;
-  text-transform: uppercase; color: var(--label); transition: color 0.4s;
+.contact__field label { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+.contact__field input,
+.contact__field textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  transition: border-color 0.2s, background 0.2s;
+  resize: vertical;
 }
-.contact__field input, .contact__field textarea {
-  background: var(--surface-input);
-  border: 1px solid var(--border);
-  border-radius: 10px; padding: 0.85rem 1rem;
-  color: var(--text); font-size: 0.92rem; font-family: inherit;
-  transition: border-color 0.2s, box-shadow 0.2s, background 0.4s, color 0.4s;
-  resize: none;
-}
-.contact__field input:focus, .contact__field textarea:focus {
+.contact__field input:focus,
+.contact__field textarea:focus {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--section-tag-bg);
+  border-color: var(--grad-start);
+  background: rgba(255,255,255,0.07);
 }
-.contact__field input::placeholder, .contact__field textarea::placeholder {
-  color: var(--text-ghost);
+.contact__field--error input,
+.contact__field--error textarea {
+  border-color: #ff5c5c;
 }
-.contact__submit { align-self: flex-start; margin-top: 0.5rem; min-width: 160px; }
-.contact__submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.contact__error {
+  font-size: 0.78rem;
+  color: #ff5c5c;
+  margin-top: 0.2rem;
+}
+.contact__submit { align-self: flex-start; margin-top: 0.5rem; }
 @media (max-width: 600px) {
-  .contact { padding: 5rem 1.5rem; }
   .contact__row { grid-template-columns: 1fr; }
 }

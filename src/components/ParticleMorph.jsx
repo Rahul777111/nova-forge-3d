@@ -1,9 +1,9 @@
-import React, { useRef, useMemo, useState, useEffect, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { motion, useInView } from "framer-motion";
-import * as THREE from "three";
-import gsap from "gsap";
-import "./ParticleMorph.css";
+import React, { useRef, useMemo, useState, useEffect, Suspense } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { motion, useInView } from 'framer-motion';
+import * as THREE from 'three';
+import gsap from 'gsap';
+import './ParticleMorph.css';
 
 const COUNT = 8000;
 
@@ -49,16 +49,19 @@ function buildDNA(count) {
 }
 
 const SHAPES = [buildSphere, buildTorus, buildDNA];
-const SHAPE_LABELS = ["SPHERE", "TORUS", "DNA"];
-const SHAPE_COLORS = ["#4f8ef7", "#a259ff", "#e8b86d"];
+const SHAPE_LABELS = ['SPHERE', 'TORUS', 'DNA'];
+const SHAPE_COLORS = ['#4f8ef7', '#a259ff', '#e8b86d'];
+
+// Pre-build sphere once - avoids rebuild on re-render
 const INITIAL_SPHERE = buildSphere(COUNT);
 
+// Pre-build colors once at module level
 const COLORS = (() => {
   const arr = new Float32Array(COUNT * 3);
   const palette = [
-    new THREE.Color("#4f8ef7"),
-    new THREE.Color("#a259ff"),
-    new THREE.Color("#e8b86d"),
+    new THREE.Color('#4f8ef7'),
+    new THREE.Color('#a259ff'),
+    new THREE.Color('#e8b86d'),
   ];
   for (let i = 0; i < COUNT; i++) {
     const c = palette[i % 3];
@@ -70,6 +73,7 @@ const COLORS = (() => {
 function MorphMesh({ targetRef }) {
   const points = useRef();
   const currentPos = useRef(new Float32Array(INITIAL_SPHERE));
+  // useMemo so posArray is stable - not recreated on re-render
   const posArray = useMemo(() => new Float32Array(INITIAL_SPHERE), []);
 
   useEffect(() => {
@@ -78,7 +82,7 @@ function MorphMesh({ targetRef }) {
       const from = { t: 0 };
       const snapshot = new Float32Array(currentPos.current);
       gsap.to(from, {
-        t: 1, duration: 1.8, ease: "power3.inOut",
+        t: 1, duration: 1.8, ease: 'power3.inOut',
         onUpdate: () => {
           if (!points.current) return;
           const pos = points.current.geometry.attributes.position.array;
@@ -113,7 +117,8 @@ export default function ParticleMorph() {
   const sectionRef = useRef();
   const morphFn = useRef(null);
   const [active, setActive] = useState(0);
-  const inView = useInView(sectionRef, { once: true, margin: "-80px" });
+  // frameloop demand when not in view saves GPU
+  const inView = useInView(sectionRef, { once: false, margin: '-80px' });
 
   const handleShape = (i) => {
     setActive(i);
@@ -125,9 +130,9 @@ export default function ParticleMorph() {
       <div className="morph__canvas">
         <Canvas
           camera={{ position: [0, 0, 8], fov: 55 }}
-          dpr={[1, 2]}
-          gl={{ antialias: true, alpha: true }}
-          frameloop="always"
+          dpr={[1, 1.5]}
+          gl={{ antialias: false, alpha: true }}
+          frameloop={inView ? 'always' : 'demand'}
         >
           <ambientLight intensity={0.4} />
           <pointLight position={[5,5,5]} intensity={2} color="#4f8ef7" />
@@ -163,8 +168,8 @@ export default function ParticleMorph() {
           {SHAPE_LABELS.map((label, i) => (
             <button
               key={label}
-              className={`morph__btn${active === i ? " morph__btn--active" : ""}`}
-              style={{ "--accent-color": SHAPE_COLORS[i] }}
+              className={`morph__btn${active === i ? ' morph__btn--active' : ''}`}
+              style={{ '--accent-color': SHAPE_COLORS[i] }}
               onClick={() => handleShape(i)}
             >
               {label}
