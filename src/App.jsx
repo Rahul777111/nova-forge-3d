@@ -18,6 +18,8 @@ import './App.css';
 
 const ScrollTicker    = lazy(() => import('./components/ScrollTicker'));
 const StatsBar        = lazy(() => import('./components/StatsBar'));
+const About           = lazy(() => import('./components/About'));
+const Projects        = lazy(() => import('./components/Projects'));
 const ProductShowcase = lazy(() => import('./components/ProductShowcase'));
 const Services        = lazy(() => import('./components/Services'));
 const TechStack       = lazy(() => import('./components/TechStack'));
@@ -66,6 +68,8 @@ function AppInner() {
           <Suspense fallback={<SectionSkeleton />}>
             <StatsBar />
             <ScrollTicker />
+            <About />
+            <Projects />
             <ProductShowcase />
             <Services />
             <TechStack />
