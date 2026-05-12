@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import ReCAPTCHA from 'react-google-recaptcha';
 import Toast from './Toast';
 import './Contact.css';
 
-const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'service_cs1ej4v';
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_ikk3l4o';
-const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || '9TGOfg-yo4r5dTlQs';
+const SERVICE_ID   = import.meta.env.VITE_EMAILJS_SERVICE_ID   || 'service_cs1ej4v';
+const TEMPLATE_ID  = import.meta.env.VITE_EMAILJS_TEMPLATE_ID  || 'template_ikk3l4o';
+const PUBLIC_KEY   = import.meta.env.VITE_EMAILJS_PUBLIC_KEY   || '9TGOfg-yo4r5dTlQs';
+const RECAPTCHA_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY  || '6LeAKeYsAAAAAOdTrYKq__m5M8I21R0gDWLd655p';
 
 function validate(fields) {
   const errors = {};
@@ -25,11 +27,13 @@ function validate(fields) {
 
 export default function Contact() {
   const formRef = useRef();
+  const captchaRef = useRef();
   const [sending, setSending] = useState(false);
   const [toast, setToast] = useState(null);
   const [fields, setFields] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -53,7 +57,10 @@ export default function Contact() {
     const errs = validate(fields);
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
-
+    if (!captchaToken) {
+      setToast({ message: 'Please complete the reCAPTCHA.', type: 'error' });
+      return;
+    }
     setSending(true);
     try {
       await emailjs.send(
@@ -64,16 +71,19 @@ export default function Contact() {
           message: fields.message,
           time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
           reply_to: fields.email,
+          'g-recaptcha-response': captchaToken,
         },
         PUBLIC_KEY
       );
-      setToast({ message: 'Message sent! I will get back to you soon.', type: 'success' });
+      setToast({ message: 'I will get back to you soon.', type: 'success' });
       setFields({ name: '', email: '', message: '' });
       setTouched({});
       setErrors({});
+      setCaptchaToken(null);
+      captchaRef.current?.reset();
     } catch (err) {
       console.error('EmailJS error:', err);
-      setToast({ message: 'Error: ' + (err?.text || err?.message || JSON.stringify(err)), type: 'error' });
+      setToast({ message: err?.text || 'Could not send. Please try again later.', type: 'error' });
     } finally {
       setSending(false);
     }
@@ -108,6 +118,15 @@ export default function Contact() {
               placeholder="Tell me about your project..."
               value={fields.message} onChange={handleChange} onBlur={handleBlur} />
             {errors.message && <span className="contact__error">{errors.message}</span>}
+          </div>
+          <div className="contact__captcha">
+            <ReCAPTCHA
+              ref={captchaRef}
+              sitekey={RECAPTCHA_KEY}
+              theme="dark"
+              onChange={token => setCaptchaToken(token)}
+              onExpired={() => setCaptchaToken(null)}
+            />
           </div>
           <button type="submit" className="btn btn--primary contact__submit" disabled={sending}>
             {sending ? 'Sending...' : 'Send Message'}

@@ -34,3 +34,5 @@
 @media (max-width: 600px) {
   .contact__row { grid-template-columns: 1fr; }
 }
+
+.contact__captcha { margin: 8px 0 4px; display: flex; justify-content: flex-start; }
