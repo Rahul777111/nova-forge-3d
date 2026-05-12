@@ -4,7 +4,7 @@ import Toast from './Toast';
 import './Contact.css';
 
 const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'service_cs1ej4v';
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_ikk3140';
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_ikk3l4o';
 const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || '9TGOfg-yo4r5dTlQs';
 
 function validate(fields) {
