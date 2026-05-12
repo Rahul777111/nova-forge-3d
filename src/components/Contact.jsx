@@ -71,8 +71,9 @@ export default function Contact() {
       setFields({ name: '', email: '', message: '' });
       setTouched({});
       setErrors({});
-    } catch {
-      setToast({ message: 'Could not send. Please try again later.', type: 'error' });
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setToast({ message: 'Error: ' + (err?.text || err?.message || JSON.stringify(err)), type: 'error' });
     } finally {
       setSending(false);
     }
