@@ -1,11 +1,10 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import { motion } from 'framer-motion';
 import Toast from './Toast';
 import './Contact.css';
 
 const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'service_cs1ej4v';
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_contact';
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_xatjp3d';
 const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || '9TGOfg-yo4r5dTlQs';
 
 function validate(fields) {
@@ -28,7 +27,7 @@ export default function Contact() {
   const formRef = useRef();
   const [sending, setSending] = useState(false);
   const [toast, setToast] = useState(null);
-  const [fields, setFields] = useState({ name: '', email: '', company: '', message: '' });
+  const [fields, setFields] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
 
@@ -50,21 +49,30 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const allTouched = { name: true, email: true, message: true };
-    setTouched(allTouched);
+    setTouched({ name: true, email: true, message: true });
     const errs = validate(fields);
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
     setSending(true);
     try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY);
-      setToast({ message: 'Message sent! We will be in touch within 24 hours.', type: 'success' });
-      setFields({ name: '', email: '', company: '', message: '' });
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          name: fields.name,
+          message: fields.message,
+          time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+          reply_to: fields.email,
+        },
+        PUBLIC_KEY
+      );
+      setToast({ message: 'Message sent! I will get back to you soon.', type: 'success' });
+      setFields({ name: '', email: '', message: '' });
       setTouched({});
       setErrors({});
     } catch {
-      setToast({ message: 'Could not send. Please email us at hello@novaforge.ai', type: 'error' });
+      setToast({ message: 'Could not send. Please try again later.', type: 'error' });
     } finally {
       setSending(false);
     }
@@ -73,16 +81,12 @@ export default function Contact() {
   return (
     <section id="contact" className="contact">
       <div className="contact__inner">
-        <motion.div className="section-header"
-          initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }} viewport={{ once: true }}>
+        <div className="section-header">
           <span className="section-tag">Get in Touch</span>
-          <h2 className="section-title">Ready to Build<br /><span className="grad">Something Intelligent?</span></h2>
-          <p className="section-sub">Tell us about your project. We respond within 24 hours.</p>
-        </motion.div>
-        <motion.form ref={formRef} className="contact__form" onSubmit={handleSubmit} noValidate
-          initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }} viewport={{ once: true }}>
+          <h2 className="section-title">Let's Build Something <span className="grad">Amazing</span></h2>
+          <p className="section-sub">Fill the form below and I'll get back to you ASAP.</p>
+        </div>
+        <form ref={formRef} className="contact__form" onSubmit={handleSubmit} noValidate>
           <div className="contact__row">
             <div className={`contact__field${errors.name ? ' contact__field--error' : ''}`}>
               <label htmlFor="name">Name *</label>
@@ -92,27 +96,22 @@ export default function Contact() {
             </div>
             <div className={`contact__field${errors.email ? ' contact__field--error' : ''}`}>
               <label htmlFor="email">Email *</label>
-              <input id="email" name="email" type="email" placeholder="you@company.com"
+              <input id="email" name="email" type="email" placeholder="you@email.com"
                 value={fields.email} onChange={handleChange} onBlur={handleBlur} />
               {errors.email && <span className="contact__error">{errors.email}</span>}
             </div>
           </div>
-          <div className="contact__field">
-            <label htmlFor="company">Company</label>
-            <input id="company" name="company" type="text" placeholder="Your company"
-              value={fields.company} onChange={handleChange} />
-          </div>
           <div className={`contact__field${errors.message ? ' contact__field--error' : ''}`}>
             <label htmlFor="message">Message *</label>
             <textarea id="message" name="message" rows={5}
-              placeholder="Tell us about your project, timeline, and goals..."
+              placeholder="Tell me about your project..."
               value={fields.message} onChange={handleChange} onBlur={handleBlur} />
             {errors.message && <span className="contact__error">{errors.message}</span>}
           </div>
           <button type="submit" className="btn btn--primary contact__submit" disabled={sending}>
             {sending ? 'Sending...' : 'Send Message'}
           </button>
-        </motion.form>
+        </form>
       </div>
       {toast && <Toast message={toast.message} type={toast.type} onDone={() => setToast(null)} />}
     </section>
