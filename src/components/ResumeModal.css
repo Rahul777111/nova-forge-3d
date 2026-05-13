@@ -1,0 +1,103 @@
+.resume-modal__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: rmFadeIn .2s ease;
+}
+@keyframes rmFadeIn { from { opacity:0 } to { opacity:1 } }
+
+.resume-modal {
+  background: #12101a;
+  border: 1px solid rgba(124,58,237,.35);
+  border-radius: 18px;
+  padding: 40px 36px 32px;
+  max-width: 420px;
+  width: 92%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 60px rgba(124,58,237,.25);
+  animation: rmSlideUp .25s ease;
+}
+@keyframes rmSlideUp { from { transform:translateY(24px);opacity:0 } to { transform:translateY(0);opacity:1 } }
+
+.resume-modal__close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color .15s;
+}
+.resume-modal__close:hover { color: #fff; }
+
+.resume-modal__icon { font-size: 3rem; margin-bottom: 12px; }
+
+.resume-modal__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.resume-modal__sub {
+  font-size: .92rem;
+  color: #999;
+  margin-bottom: 28px;
+}
+
+.resume-modal__actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.resume-modal__btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border-radius: 10px;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  border: none;
+}
+
+.resume-modal__btn--view {
+  background: rgba(124,58,237,.15);
+  border: 1px solid rgba(124,58,237,.4);
+  color: #a78bfa;
+}
+.resume-modal__btn--view:hover {
+  background: rgba(124,58,237,.3);
+  transform: translateY(-2px);
+}
+
+.resume-modal__btn--download {
+  background: #7c3aed;
+  color: #fff;
+}
+.resume-modal__btn--download:hover {
+  background: #6d28d9;
+  transform: translateY(-2px);
+}
+
+.resume-modal__btn-icon { font-size: 1.1rem; }
+
+.resume-modal__note {
+  font-size: .78rem;
+  color: #555;
+  margin: 0;
+}

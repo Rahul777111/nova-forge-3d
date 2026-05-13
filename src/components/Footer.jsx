@@ -1,5 +1,6 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import PolicyModal from "./PolicyModal";
+import ResumeModal from "./ResumeModal";
 import "./Footer.css";
 
 function scrollTo(id) {
@@ -9,6 +10,7 @@ function scrollTo(id) {
 
 export default function Footer() {
   const [policy, setPolicy] = useState(null);
+  const [showResume, setShowResume] = useState(false);
 
   return (
     <>
@@ -39,6 +41,7 @@ export default function Footer() {
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">X / Twitter</a>
                 <button onClick={() => scrollTo("#contact")}>hello@novaforge.ai</button>
+                <button onClick={() => setShowResume(true)}>Resume</button>
               </div>
             </div>
           </div>
@@ -52,6 +55,7 @@ export default function Footer() {
         </div>
       </footer>
       {policy && <PolicyModal type={policy} onClose={() => setPolicy(null)} />}
+      {showResume && <ResumeModal onClose={() => setShowResume(false)} />}
     </>
   );
 }
