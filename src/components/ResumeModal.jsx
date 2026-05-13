@@ -34,7 +34,6 @@ export default function ResumeModal({ onClose }) {
             Download PDF
           </button>
         </div>
-        <p className="resume-modal__note">This is a legitimate PDF resume — no scripts, no surprises.</p>
       </div>
     </div>
   );
