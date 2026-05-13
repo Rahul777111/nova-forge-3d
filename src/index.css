@@ -57,96 +57,65 @@
   --statsbar-bg:           rgba(79,142,247,0.04);
   --img-filter:            brightness(0.85) saturate(1.1);
   --img-modal-filter:      brightness(0.8) saturate(1.15);
-  /* hero-specific */
-  --hero-sub-bg:           rgba(6,8,20,0.55);
-  --hero-sub-border:       rgba(255,255,255,0.06);
-  --hero-sub-color:        rgba(220,225,255,0.92);
-  --hero-title-shadow:     0 2px 40px rgba(0,0,0,0.8), 0 0 60px rgba(79,142,247,0.25);
-  --hero-ghost-border:     rgba(255,255,255,0.15);
-  --hero-ghost-bg:         rgba(255,255,255,0.04);
-  --hero-badge-bg:         rgba(79,142,247,0.08);
-  --hero-badge-border:     rgba(79,142,247,0.35);
 }
 
-/* LIGHT — premium, high-contrast, clean */
+/* LIGHT */
 [data-theme="light"] {
-  /* Backgrounds: warm white + subtle blue-grey tones */
-  --bg:                    #f5f7ff;
+  --bg:                    #f0f4ff;
   --surface:               #ffffff;
-  --surface2:              #eef1fb;
-  --surface3:              rgba(255,255,255,0.92);
-  --surface-card:          rgba(255,255,255,0.95);
-  --surface-card-hover:    rgba(255,255,255,1);
-  --surface-input:         rgba(255,255,255,0.98);
-  --surface-ticker:        rgba(14,90,210,0.05);
-  --surface-showcase-canvas: rgba(220,230,255,0.4);
-
-  /* Borders: visible but subtle blue-tinted */
-  --border:                rgba(14,90,210,0.13);
-  --border-strong:         rgba(14,90,210,0.28);
-  --border-subtle:         rgba(14,90,210,0.08);
-  --border-ticker:         rgba(14,90,210,0.12);
-
-  /* Brand colors: slightly deeper for WCAG contrast on white */
-  --accent:                #1a5fd4;
-  --accent2:               #6d28d9;
-  --gold:                  #b06f00;
-
-  /* Text: true dark navy for max contrast (not pure black) */
-  --text:                  #0b1325;
-  --text-secondary:        rgba(11,19,37,0.82);
-  --text-dim:              rgba(11,19,37,0.62);
-  --text-faint:            rgba(11,19,37,0.42);
-  --text-ghost:            rgba(11,19,37,0.28);
-  --muted:                 #3a4d72;
-  --label:                 rgba(11,19,37,0.52);
-
+  --surface2:              #e8eeff;
+  --surface3:              rgba(255,255,255,0.85);
+  --surface-card:          rgba(255,255,255,0.82);
+  --surface-card-hover:    rgba(255,255,255,0.98);
+  --surface-input:         rgba(255,255,255,0.9);
+  --surface-ticker:        rgba(14,90,210,0.04);
+  --surface-showcase-canvas: rgba(224,232,255,0.5);
+  --border:                rgba(14,90,210,0.1);
+  --border-strong:         rgba(14,90,210,0.22);
+  --border-subtle:         rgba(14,90,210,0.07);
+  --border-ticker:         rgba(14,90,210,0.1);
+  --accent:                #0e5ad2;
+  --accent2:               #7c3aed;
+  --gold:                  #c8860a;
+  --text:                  #0d1426;
+  --text-secondary:        rgba(13,20,38,0.88);
+  --text-dim:              rgba(13,20,38,0.65);
+  --text-faint:            rgba(13,20,38,0.45);
+  --text-ghost:            rgba(13,20,38,0.3);
+  --muted:                 #3d4f72;
+  --label:                 rgba(13,20,38,0.5);
   --font-sans:             'Inter', sans-serif;
   --font-display:          'Space Grotesk', sans-serif;
-
-  /* Cards: white with clear shadow depth */
-  --card-bg:               rgba(255,255,255,0.92);
-  --navbar-bg:             rgba(245,247,255,0.94);
-  --navbar-border:         rgba(14,90,210,0.12);
-  --section-tag-bg:        rgba(26,95,212,0.08);
-  --section-tag-border:    rgba(26,95,212,0.28);
-
-  --grad-start:            #1a5fd4;
-  --grad-end:              #6d28d9;
-  --shadow-glow:           rgba(26,95,212,0.14);
-  --shadow-card:           rgba(11,19,37,0.09);
-  --shadow-card-hover:     rgba(11,19,37,0.16);
-
-  --blog-overlay:          linear-gradient(to bottom, rgba(245,247,255,0.05) 0%, rgba(245,247,255,0.45) 100%);
+  --card-bg:               rgba(255,255,255,0.75);
+  --navbar-bg:             rgba(240,244,255,0.92);
+  --navbar-border:         rgba(14,90,210,0.1);
+  --section-tag-bg:        rgba(14,90,210,0.07);
+  --section-tag-border:    rgba(14,90,210,0.25);
+  --grad-start:            #0e5ad2;
+  --grad-end:              #7c3aed;
+  --shadow-glow:           rgba(14,90,210,0.12);
+  --shadow-card:           rgba(14,90,210,0.08);
+  --shadow-card-hover:     rgba(14,90,210,0.14);
+  --blog-overlay:          linear-gradient(to bottom, rgba(240,244,255,0.05) 0%, rgba(240,244,255,0.4) 100%);
   --modal-bg:              #ffffff;
-  --modal-overlay:         rgba(11,19,37,0.60);
-  --faq-open-border:       rgba(26,95,212,0.32);
-  --pricing-highlight-bg:  linear-gradient(160deg, rgba(109,40,217,0.07), rgba(255,255,255,1));
-  --pricing-highlight-border: rgba(109,40,217,0.32);
-  --pricing-highlight-shadow: 0 0 0 1px rgba(109,40,217,0.14), 0 20px 60px rgba(109,40,217,0.09);
-  --testimonials-card-bg:  rgba(255,255,255,0.98);
-  --process-body-bg:       rgba(26,95,212,0.04);
-  --casestudies-bg:        rgba(26,95,212,0.05);
-  --casestudies-stat-bg:   rgba(255,255,255,0.98);
-  --casestudies-stats-gap: rgba(14,90,210,0.10);
-  --blog-bg:               rgba(26,95,212,0.04);
-  --footer-border:         rgba(14,90,210,0.12);
-  --footer-bottom-border:  rgba(14,90,210,0.08);
-  --techstack-item-bg:     rgba(26,95,212,0.06);
-  --techstack-label-color: rgba(11,19,37,0.38);
-  --statsbar-bg:           rgba(26,95,212,0.05);
+  --modal-overlay:         rgba(13,20,38,0.55);
+  --faq-open-border:       rgba(14,90,210,0.3);
+  --pricing-highlight-bg:  linear-gradient(160deg, rgba(124,58,237,0.07), rgba(255,255,255,0.95));
+  --pricing-highlight-border: rgba(124,58,237,0.3);
+  --pricing-highlight-shadow: 0 0 0 1px rgba(124,58,237,0.12), 0 20px 60px rgba(124,58,237,0.08);
+  --testimonials-card-bg:  rgba(255,255,255,0.95);
+  --process-body-bg:       rgba(14,90,210,0.03);
+  --casestudies-bg:        rgba(14,90,210,0.04);
+  --casestudies-stat-bg:   rgba(255,255,255,0.95);
+  --casestudies-stats-gap: rgba(14,90,210,0.08);
+  --blog-bg:               rgba(14,90,210,0.03);
+  --footer-border:         rgba(14,90,210,0.1);
+  --footer-bottom-border:  rgba(14,90,210,0.07);
+  --techstack-item-bg:     rgba(14,90,210,0.05);
+  --techstack-label-color: rgba(13,20,38,0.35);
+  --statsbar-bg:           rgba(14,90,210,0.04);
   --img-filter:            brightness(1) saturate(1.05);
   --img-modal-filter:      brightness(1) saturate(1.1);
-
-  /* hero-specific light mode overrides */
-  --hero-sub-bg:           rgba(255,255,255,0.72);
-  --hero-sub-border:       rgba(26,95,212,0.18);
-  --hero-sub-color:        rgba(11,19,37,0.88);
-  --hero-title-shadow:     0 2px 24px rgba(11,19,37,0.12), 0 0 40px rgba(26,95,212,0.10);
-  --hero-ghost-border:     rgba(26,95,212,0.30);
-  --hero-ghost-bg:         rgba(26,95,212,0.06);
-  --hero-badge-bg:         rgba(26,95,212,0.09);
-  --hero-badge-border:     rgba(26,95,212,0.32);
 }
 
 html { scroll-behavior: smooth; }
