@@ -14,6 +14,7 @@ import ScrollJourney  from './components/ScrollJourney';
 import BgBot          from './components/BgBot';
 import CursorBot      from './components/CursorBot';
 import SkeletonLoader from './components/SkeletonLoader';
+import RibbonCursor   from './components/RibbonCursor';
 import './App.css';
 
 const ScrollTicker    = lazy(() => import('./components/ScrollTicker'));
@@ -57,6 +58,7 @@ function AppInner() {
       <ScrollJourney />
       <ScrollProgress />
       <CustomCursor />
+      <RibbonCursor />
       <CookieBanner />
       <BgBot />
       <CursorBot />
