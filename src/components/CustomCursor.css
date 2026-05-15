@@ -1,29 +1,10 @@
-@media (pointer: coarse) { .cursor-dot, .cursor-ring { display: none; } }
-body { cursor: none; }
-a, button, .btn { cursor: none; }
-
-.cursor--hidden { opacity: 0 !important; }
-
-.cursor-dot {
-  position: fixed; top: -4px; left: -4px;
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #4f8ef7;
-  pointer-events: none; z-index: 99999;
-  will-change: transform;
-  box-shadow: 0 0 8px #4f8ef7, 0 0 16px rgba(79,142,247,0.5);
-  transition: opacity 0.2s;
-}
-.cursor-ring {
-  position: fixed; top: -18px; left: -18px;
-  width: 36px; height: 36px; border-radius: 50%;
-  border: 1px solid rgba(79,142,247,0.6);
-  pointer-events: none; z-index: 99998;
-  will-change: transform;
-  transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s, border-color 0.3s, background 0.3s, opacity 0.2s;
-}
-.cursor-ring--hover {
-  width: 56px; height: 56px;
-  top: -28px; left: -28px;
-  border-color: rgba(162,89,255,0.8);
-  background: rgba(162,89,255,0.06);
+.smoke-cursor-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: screen;
 }

@@ -1,74 +1,109 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import './CustomCursor.css';
-import { useIsMobile } from '../hooks/useIsMobile';
+
+const PARTICLE_COUNT = 60;
+const COLORS = [
+  [120, 180, 255],
+  [160, 100, 255],
+  [80,  200, 255],
+  [200, 120, 255],
+  [100, 230, 255],
+];
 
 export default function CustomCursor() {
-  const ringRef = useRef(null);
-  const dotRef = useRef(null);
-  const isMobile = useIsMobile();
-  const [hidden, setHidden] = useState(false);
-  const [hovered, setHovered] = useState(false);
+  const canvasRef = useRef(null);
+  const mouse     = useRef({ x: -200, y: -200 });
+  const particles = useRef([]);
+  const rafRef    = useRef(null);
 
   useEffect(() => {
-    if (isMobile) return;
-    let rafId;
-    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-    let cx = mx, cy = my;
+    const canvas = canvasRef.current;
+    const ctx    = canvas.getContext('2d');
 
-    const onMove = (e) => { mx = e.clientX; my = e.clientY; };
-    const onLeave = () => setHidden(true);
-    const onEnter = () => setHidden(false);
-    const onHoverIn = () => setHovered(true);
-    const onHoverOut = () => setHovered(false);
-
-    const loop = () => {
-      cx += (mx - cx) * 0.12;
-      cy += (my - cy) * 0.12;
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${cx}px, ${cy}px)`;
-      }
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${mx}px, ${my}px)`;
-      }
-      rafId = requestAnimationFrame(loop);
+    const resize = () => {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
+    resize();
+    window.addEventListener('resize', resize);
 
-    document.querySelectorAll('a, button, .btn').forEach(el => {
-      el.addEventListener('mouseenter', onHoverIn);
-      el.addEventListener('mouseleave', onHoverOut);
-    });
+    const onMove = (e) => {
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
+      // spawn 3 particles per move
+      for (let i = 0; i < 3; i++) spawnParticle();
+    };
+    window.addEventListener('mousemove', onMove);
 
-    document.addEventListener('mousemove', onMove, { passive: true });
-    document.addEventListener('mouseleave', onLeave);
-    document.addEventListener('mouseenter', onEnter);
-    rafId = requestAnimationFrame(loop);
+    function spawnParticle() {
+      const col   = COLORS[Math.floor(Math.random() * COLORS.length)];
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 1.2 + 0.2;
+      particles.current.push({
+        x:     mouse.current.x + (Math.random() - 0.5) * 6,
+        y:     mouse.current.y + (Math.random() - 0.5) * 6,
+        vx:    Math.cos(angle) * speed * 0.4,
+        vy:    Math.sin(angle) * speed * 0.4 - 0.6,
+        life:  1.0,
+        decay: Math.random() * 0.018 + 0.012,
+        size:  Math.random() * 7 + 3,
+        col,
+      });
+      if (particles.current.length > PARTICLE_COUNT) {
+        particles.current.shift();
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // draw glow dot at cursor
+      const grd = ctx.createRadialGradient(
+        mouse.current.x, mouse.current.y, 0,
+        mouse.current.x, mouse.current.y, 14
+      );
+      grd.addColorStop(0,   'rgba(150,200,255,0.95)');
+      grd.addColorStop(0.3, 'rgba(100,140,255,0.6)');
+      grd.addColorStop(1,   'rgba(80,100,255,0)');
+      ctx.beginPath();
+      ctx.arc(mouse.current.x, mouse.current.y, 14, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+
+      // draw particles
+      for (let i = particles.current.length - 1; i >= 0; i--) {
+        const p = particles.current[i];
+        p.x    += p.vx;
+        p.y    += p.vy;
+        p.vy   -= 0.015; // float upward
+        p.vx   *= 0.98;
+        p.life -= p.decay;
+        if (p.life <= 0) { particles.current.splice(i, 1); continue; }
+
+        const r   = p.size * p.life;
+        const gp  = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 2.2);
+        const [R, G, B] = p.col;
+        gp.addColorStop(0,   `rgba(${R},${G},${B},${p.life * 0.85})`);
+        gp.addColorStop(0.5, `rgba(${R},${G},${B},${p.life * 0.3})`);
+        gp.addColorStop(1,   `rgba(${R},${G},${B},0)`);
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r * 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = gp;
+        ctx.fill();
+      }
+
+      rafRef.current = requestAnimationFrame(draw);
+    }
+
+    draw();
 
     return () => {
-      cancelAnimationFrame(rafId);
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseleave', onLeave);
-      document.removeEventListener('mouseenter', onEnter);
-      document.querySelectorAll('a, button, .btn').forEach(el => {
-        el.removeEventListener('mouseenter', onHoverIn);
-        el.removeEventListener('mouseleave', onHoverOut);
-      });
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onMove);
+      cancelAnimationFrame(rafRef.current);
     };
-  }, [isMobile]);
+  }, []);
 
-  if (isMobile) return null;
-
-  return (
-    <>
-      <div
-        ref={dotRef}
-        className={`cursor-dot ${hidden ? 'cursor--hidden' : ''}`}
-        aria-hidden="true"
-      />
-      <div
-        ref={ringRef}
-        className={`cursor-ring ${hovered ? 'cursor-ring--hover' : ''} ${hidden ? 'cursor--hidden' : ''}`}
-        aria-hidden="true"
-      />
-    </>
-  );
+  return <canvas ref={canvasRef} className="smoke-cursor-canvas" />;
 }
