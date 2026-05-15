@@ -1,6 +1,5 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
-import { ThemeProvider } from './context/ThemeContext';
 import { useAppStore } from './store/appStore';
 import SEO            from './components/SEO';
 import Navbar         from './components/Navbar';
@@ -96,9 +95,7 @@ function AppInner() {
 export default function App() {
   return (
     <HelmetProvider>
-      <ThemeProvider>
-        <AppInner />
-      </ThemeProvider>
+      <AppInner />
     </HelmetProvider>
   );
 }
