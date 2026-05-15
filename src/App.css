@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  cursor: none !important;
+}
+
 .app {
   position: relative;
   z-index: 1;
