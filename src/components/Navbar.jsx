@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import ThemeToggle from './ThemeToggle';
 import { useAppStore } from '../store/appStore';
 import './Navbar.css';
 
@@ -22,6 +23,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
+  // Active section detection via IntersectionObserver
   useEffect(() => {
     const sectionIds = links.map(l => l.href.replace('#', ''));
     const observers = [];
@@ -38,6 +40,7 @@ export default function Navbar() {
     return () => observers.forEach(o => o.disconnect());
   }, [setActiveSection]);
 
+  // Close mobile menu on outside click
   useEffect(() => {
     if (!open) return;
     const handler = (e) => {
@@ -74,9 +77,11 @@ export default function Navbar() {
           </a>
         ))}
         <a href="#contact" className="navbar__cta" onClick={e => handleNav(e, '#contact')}>Start Project</a>
+        <ThemeToggle />
       </nav>
 
       <div className="navbar__right">
+        <ThemeToggle />
         <button
           className={`navbar__burger${open ? ' navbar__burger--open' : ''}`}
           aria-label="Toggle menu"
