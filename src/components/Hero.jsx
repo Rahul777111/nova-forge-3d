@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, Suspense, useMemo } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Stars, Float, MeshDistortMaterial, Sphere } from "@react-three/drei";
+import { Stars, Float } from "@react-three/drei";
 import { EffectComposer, Bloom, ChromaticAberration, Vignette } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import { motion } from "framer-motion";
@@ -12,7 +12,6 @@ function scrollTo(id) {
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-// Wobbly liquid orb vertex + fragment shaders
 const wobbleVert = `
 uniform float uTime;
 uniform float uDistort;
@@ -20,7 +19,6 @@ varying vec3 vNormal;
 varying vec3 vPos;
 varying vec3 vWorldPos;
 
-// Simplex-style 3D noise
 vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
 vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
 vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
@@ -71,12 +69,9 @@ float snoise(vec3 v){
 void main() {
   vNormal = normalize(normalMatrix * normal);
   vPos = position;
-
-  // Multi-octave displacement for organic wobble
   float n  = snoise(position * 1.8 + uTime * 0.38) * 0.42;
        n += snoise(position * 3.6 + uTime * 0.55 + 1.7) * 0.18;
        n += snoise(position * 7.2 + uTime * 0.72 + 3.3) * 0.08;
-
   vec3 displaced = position + normal * n * uDistort;
   vWorldPos = (modelMatrix * vec4(displaced, 1.0)).xyz;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
@@ -92,33 +87,23 @@ varying vec3 vWorldPos;
 void main() {
   vec3 norm = normalize(vNormal);
   vec3 viewDir = normalize(cameraPosition - vWorldPos);
-
-  // Fresnel rim
   float fresnel = pow(1.0 - max(dot(norm, viewDir), 0.0), 3.5);
-
-  // Iridescent base: shift hue based on normal + time
   float hShift = norm.y * 0.5 + norm.x * 0.3 + uTime * 0.08;
-  vec3 col1 = vec3(0.28, 0.08, 0.95);  // deep violet
-  vec3 col2 = vec3(0.05, 0.55, 1.00);  // electric blue
-  vec3 col3 = vec3(0.80, 0.10, 0.60);  // magenta
+  vec3 col1 = vec3(0.28, 0.08, 0.95);
+  vec3 col2 = vec3(0.05, 0.55, 1.00);
+  vec3 col3 = vec3(0.80, 0.10, 0.60);
   float t1 = sin(hShift * 3.14) * 0.5 + 0.5;
   float t2 = cos(hShift * 2.71 + 1.1) * 0.5 + 0.5;
   vec3 base = mix(mix(col1, col2, t1), col3, t2 * 0.4);
-
-  // Diffuse lighting
   vec3 light1 = normalize(vec3(1.5, 2.0, 2.0));
   vec3 light2 = normalize(vec3(-2.0, -1.0, 1.5));
   float diff1 = max(dot(norm, light1), 0.0);
   float diff2 = max(dot(norm, light2), 0.0) * 0.4;
-
-  // Specular
   vec3 half1 = normalize(light1 + viewDir);
   float spec = pow(max(dot(norm, half1), 0.0), 64.0) * 0.9;
-
   vec3 col = base * (0.15 + diff1 * 0.7 + diff2)
            + vec3(0.8, 0.85, 1.0) * spec
            + vec3(0.4, 0.2, 1.0) * fresnel * 1.2;
-
   gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
 }
 `;
@@ -141,37 +126,22 @@ function LiquidOrb() {
 
   return (
     <group>
-      {/* Main wobbly orb */}
       <mesh ref={meshRef}>
         <sphereGeometry args={[1.1, 128, 128]} />
-        <shaderMaterial
-          vertexShader={wobbleVert}
-          fragmentShader={wobbleFrag}
-          uniforms={uniforms}
-        />
+        <shaderMaterial vertexShader={wobbleVert} fragmentShader={wobbleFrag} uniforms={uniforms} />
       </mesh>
-
-      {/* Inner glow sphere */}
       <mesh>
         <sphereGeometry args={[1.08, 32, 32]} />
         <meshBasicMaterial color="#5010ff" transparent opacity={0.08} side={THREE.BackSide} />
       </mesh>
-
-      {/* Orbital ring 1 */}
       <mesh ref={ringRef} rotation={[Math.PI * 0.45, 0.3, 0]}>
         <torusGeometry args={[1.68, 0.009, 6, 256]} />
-        <meshBasicMaterial color="#a259ff" transparent opacity={0.5}
-          blending={THREE.AdditiveBlending} depthWrite={false} />
+        <meshBasicMaterial color="#a259ff" transparent opacity={0.5} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
-
-      {/* Orbital ring 2 */}
       <mesh ref={ring2Ref} rotation={[Math.PI * 0.55, -0.5, 0.8]}>
         <torusGeometry args={[1.9, 0.006, 6, 256]} />
-        <meshBasicMaterial color="#4f8ef7" transparent opacity={0.35}
-          blending={THREE.AdditiveBlending} depthWrite={false} />
+        <meshBasicMaterial color="#4f8ef7" transparent opacity={0.35} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
-
-      {/* Outer atmosphere */}
       <mesh>
         <sphereGeometry args={[1.55, 32, 32]} />
         <meshBasicMaterial color="#6020ff" transparent opacity={0.04} side={THREE.BackSide} />
@@ -194,8 +164,7 @@ function ShockwaveRing() {
   return (
     <mesh ref={ref} rotation={[Math.PI / 2, 0, 0]}>
       <ringGeometry args={[1.0, 1.06, 256]} />
-      <meshBasicMaterial color="#a259ff" transparent opacity={0.15}
-        side={THREE.DoubleSide} blending={THREE.AdditiveBlending} depthWrite={false} />
+      <meshBasicMaterial color="#a259ff" transparent opacity={0.15} side={THREE.DoubleSide} blending={THREE.AdditiveBlending} depthWrite={false} />
     </mesh>
   );
 }
@@ -292,29 +261,28 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.5, duration: 0.7 }}>
           <span className="hero__badge-dot" />
-          AI Product Engineering Studio
+          Full-Stack Developer & AI Builder
         </motion.div>
         <motion.h1 className="hero__title"
           initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.7, duration: 0.9, ease: "easeOut" }}>
-          We Build the<br />
-          <span className="hero__title--grad">Intelligence</span><br />
-          Behind Tomorrow
+          Hi, I'm<br />
+          <span className="hero__title--grad">D L Narayana</span>
         </motion.h1>
         <motion.p className="hero__sub"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3.0, duration: 0.8 }}>
-          NOVA FORGE is a precision AI product studio. We architect, design, and engineer
-          intelligent systems that give market leaders their unfair advantage.
+          I build fast, modern web apps and AI-powered tools.
+          Passionate about clean code, 3D web experiences, and turning ideas into reality.
         </motion.p>
         <motion.div className="hero__actions"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3.3, duration: 0.8 }}>
-          <button className="btn btn--primary" onClick={() => scrollTo("#contact")}>Start a Project</button>
-          <button className="btn btn--ghost" onClick={() => scrollTo("#work")}>View Our Work</button>
+          <button className="btn btn--primary" onClick={() => scrollTo("#contact")}>Get in Touch</button>
+          <button className="btn btn--ghost" onClick={() => scrollTo("#projects")}>View My Work</button>
         </motion.div>
       </div>
-      <div className="hero__scroll-hint" onClick={() => scrollTo("#work")} style={{ cursor: "pointer" }}>
+      <div className="hero__scroll-hint" onClick={() => scrollTo("#about")} style={{ cursor: "pointer" }}>
         <div className="hero__scroll-line" />
         <span>Scroll to explore</span>
       </div>

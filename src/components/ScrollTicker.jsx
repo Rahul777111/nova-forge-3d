@@ -1,11 +1,11 @@
-﻿import React from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import "./ScrollTicker.css";
 
 const items = [
-  "AI Strategy", "Model Engineering", "MLOps", "Computer Vision",
-  "NLP Systems", "Product Design", "Inference Pipelines", "Data Architecture",
-  "LLM Fine-tuning", "Edge AI", "Real-time Analytics", "AI Security",
+  "React", "Node.js", "TypeScript", "Three.js",
+  "WebGL", "MongoDB", "Tailwind CSS", "Vite",
+  "Python", "REST APIs", "GSAP", "Git",
 ];
 
 export default function ScrollTicker() {

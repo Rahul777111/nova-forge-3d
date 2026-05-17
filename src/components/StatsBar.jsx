@@ -1,4 +1,4 @@
-﻿import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useInView } from "framer-motion";
 import "./StatsBar.css";
 
@@ -19,11 +19,10 @@ function useCounter(target, inView, duration = 1800) {
 }
 
 const stats = [
-  { value: 120, suffix: "+",  label: "Models Deployed" },
-  { value: 98,  suffix: "%",  label: "Client Retention" },
-  { value: 2,   suffix: ".4B", label: "Value Generated ($)" },
-  { value: 40,  suffix: "+",  label: "Enterprise Clients" },
-  { value: 8,   suffix: "ms", label: "Avg Inference Latency" },
+  { value: 20,  suffix: "+",  label: "Projects Built" },
+  { value: 3,   suffix: "+",  label: "Years Coding" },
+  { value: 15,  suffix: "+",  label: "Tech & Tools" },
+  { value: 100, suffix: "%",  label: "Open Source" },
 ];
 
 function Stat({ value, suffix, label, inView }) {
