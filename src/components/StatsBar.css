@@ -22,8 +22,9 @@
   margin-bottom: 0.4rem;
 }
 .statsbar__label {
-  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--text-faint);
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--statsbar-label-color);
   transition: color 0.4s;
 }
 @media (max-width: 768px) { .statsbar { padding: 3rem 1.5rem; } }

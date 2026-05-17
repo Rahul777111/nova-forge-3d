@@ -11,11 +11,11 @@
 .ticker__item {
   display: inline-flex; align-items: center;
   font-family: var(--font-display);
-  font-size: 0.82rem; font-weight: 500;
+  font-size: 0.82rem; font-weight: 600;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--text-faint);
+  color: var(--ticker-color);
   padding: 0 2.5rem;
   transition: color 0.2s;
 }
 .ticker__item:hover { color: var(--accent); }
-.ticker__sep { margin-left: 2.5rem; color: var(--accent); opacity: 0.4; }
+.ticker__sep { margin-left: 2.5rem; color: var(--accent); opacity: 0.5; }
