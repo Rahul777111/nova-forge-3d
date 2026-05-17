@@ -1,7 +1,4 @@
-*, *::before, *::after {
-  cursor: none !important;
-}
-
+/* App shell — no cursor:none here (handled in CustomCursor.css) */
 .app {
   position: relative;
   z-index: 1;
