@@ -1,10 +1,65 @@
-.smoke-cursor-canvas {
+/* Hide native cursor globally */
+*, *::before, *::after { cursor: none !important; }
+
+/* --- Dot (instant, precise) --- */
+.cursor-dot {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0; left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 999999;
   pointer-events: none;
-  z-index: 99999;
-  mix-blend-mode: screen;
+  will-change: transform;
+  transition: width 0.18s ease, height 0.18s ease, background 0.18s ease;
+  mix-blend-mode: difference;
+}
+
+/* --- Ring (lags behind = magnetic feel) --- */
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  z-index: 999998;
+  pointer-events: none;
+  will-change: transform;
+  transition: width 0.22s ease, height 0.22s ease,
+              border-color 0.22s ease, border-width 0.22s ease;
+  mix-blend-mode: difference;
+}
+
+/* --- Hover state (over links/buttons) --- */
+.cursor-dot--hover {
+  width: 12px;
+  height: 12px;
+  background: #a259ff;
+}
+.cursor-ring--hover {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(162, 89, 255, 0.8);
+  border-width: 2.5px;
+}
+
+/* --- Click state --- */
+.cursor-dot--click {
+  width: 6px;
+  height: 6px;
+  background: #4f8ef7;
+}
+.cursor-ring--click {
+  width: 28px;
+  height: 28px;
+  border-color: rgba(79, 142, 247, 0.9);
+  border-width: 3px;
+}
+
+/* Mobile: restore native cursor, hide custom */
+@media (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none; }
+  *, *::before, *::after { cursor: auto !important; }
 }
