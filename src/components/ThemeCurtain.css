@@ -1,0 +1,22 @@
+.theme-curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  pointer-events: none;
+  transform-origin: top center;
+  animation: curtain-sweep 1.2s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+
+@keyframes curtain-sweep {
+  /* Roll down from top */
+  0%   { transform: scaleY(0); transform-origin: top center; opacity: 1; }
+  /* Fully covering screen at midpoint */
+  42%  { transform: scaleY(1); transform-origin: top center; opacity: 1; }
+  50%  { transform: scaleY(1); transform-origin: bottom center; opacity: 1; }
+  /* Roll up from bottom - revealing new theme */
+  92%  { transform: scaleY(0); transform-origin: bottom center; opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom center; opacity: 0; }
+}

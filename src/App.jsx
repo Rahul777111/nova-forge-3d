@@ -14,6 +14,7 @@ import ScrollJourney  from './components/ScrollJourney';
 import BgBot          from './components/BgBot';
 import CursorBot      from './components/CursorBot';
 import SkeletonLoader from './components/SkeletonLoader';
+import ThemeCurtain   from './components/ThemeCurtain';
 import './App.css';
 
 const ScrollTicker = lazy(() => import('./components/ScrollTicker'));
@@ -42,6 +43,7 @@ function AppInner() {
   return (
     <>
       <SEO />
+      <ThemeCurtain />
       <ShaderBackground />
       <ScrollJourney />
       <ScrollProgress />
