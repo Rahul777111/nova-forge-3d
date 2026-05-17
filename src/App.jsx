@@ -21,20 +21,11 @@ const ScrollTicker    = lazy(() => import('./components/ScrollTicker'));
 const StatsBar        = lazy(() => import('./components/StatsBar'));
 const About           = lazy(() => import('./components/About'));
 const Projects        = lazy(() => import('./components/Projects'));
-const ProductShowcase = lazy(() => import('./components/ProductShowcase'));
-const Services        = lazy(() => import('./components/Services'));
 const TechStack       = lazy(() => import('./components/TechStack'));
-const CaseStudies     = lazy(() => import('./components/CaseStudies'));
-const Testimonials    = lazy(() => import('./components/Testimonials'));
-const Process         = lazy(() => import('./components/Process'));
-const Team            = lazy(() => import('./components/Team'));
-const BlogTeaser      = lazy(() => import('./components/BlogTeaser'));
-const FAQ             = lazy(() => import('./components/FAQ'));
-const Pricing         = lazy(() => import('./components/Pricing'));
-const Contact         = lazy(() => import('./components/Contact'));
-const Footer          = lazy(() => import('./components/Footer'));
 const ParticleGalaxy  = lazy(() => import('./components/ParticleGalaxy'));
 const ParticleMorph   = lazy(() => import('./components/ParticleMorph'));
+const Contact         = lazy(() => import('./components/Contact'));
+const Footer          = lazy(() => import('./components/Footer'));
 
 const SectionSkeleton = () => <SkeletonLoader height="300px" borderRadius="0" />;
 
@@ -72,18 +63,9 @@ function AppInner() {
             <ScrollTicker />
             <About />
             <Projects />
-            <ProductShowcase />
-            <Services />
             <TechStack />
             <ParticleGalaxy />
             <ParticleMorph />
-            <CaseStudies />
-            <Testimonials />
-            <Process />
-            <Team />
-            <BlogTeaser />
-            <FAQ />
-            <Pricing />
             <Contact />
           </Suspense>
         </main>
