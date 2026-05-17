@@ -5,11 +5,10 @@ import { useAppStore } from '../store/appStore';
 import './Navbar.css';
 
 const links = [
-  { label: 'Capabilities', href: '#capabilities' },
-  { label: 'Work',         href: '#work' },
-  { label: 'Process',      href: '#process' },
-  { label: 'Pricing',      href: '#pricing' },
-  { label: 'Contact',      href: '#contact' },
+  { label: 'About',     href: '#about' },
+  { label: 'Projects',  href: '#projects' },
+  { label: 'Tech',      href: '#techstack' },
+  { label: 'Contact',   href: '#contact' },
 ];
 
 export default function Navbar() {
@@ -23,7 +22,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  // Active section detection via IntersectionObserver
   useEffect(() => {
     const sectionIds = links.map(l => l.href.replace('#', ''));
     const observers = [];
@@ -40,7 +38,6 @@ export default function Navbar() {
     return () => observers.forEach(o => o.disconnect());
   }, [setActiveSection]);
 
-  // Close mobile menu on outside click
   useEffect(() => {
     if (!open) return;
     const handler = (e) => {
@@ -63,7 +60,7 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 2.3, duration: 0.8, ease: 'easeOut' }}
     >
-      <a href="#hero" className="navbar__logo" onClick={e => handleNav(e, '#hero')}>NOVA FORGE</a>
+      <a href="#hero" className="navbar__logo" onClick={e => handleNav(e, '#hero')}>DLN</a>
 
       <nav className={`navbar__nav${open ? ' navbar__nav--open' : ''}`} aria-label="Main navigation">
         {links.map(l => (
@@ -76,7 +73,7 @@ export default function Navbar() {
             {l.label}
           </a>
         ))}
-        <a href="#contact" className="navbar__cta" onClick={e => handleNav(e, '#contact')}>Start Project</a>
+        <a href="#contact" className="navbar__cta" onClick={e => handleNav(e, '#contact')}>Hire Me</a>
         <ThemeToggle />
       </nav>
 

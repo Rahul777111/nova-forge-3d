@@ -14,18 +14,15 @@ import ScrollJourney  from './components/ScrollJourney';
 import BgBot          from './components/BgBot';
 import CursorBot      from './components/CursorBot';
 import SkeletonLoader from './components/SkeletonLoader';
-// import RibbonCursor from './components/RibbonCursor'; // disabled - smoke cursor active
 import './App.css';
 
-const ScrollTicker    = lazy(() => import('./components/ScrollTicker'));
-const StatsBar        = lazy(() => import('./components/StatsBar'));
-const About           = lazy(() => import('./components/About'));
-const Projects        = lazy(() => import('./components/Projects'));
-const TechStack       = lazy(() => import('./components/TechStack'));
-const ParticleGalaxy  = lazy(() => import('./components/ParticleGalaxy'));
-const ParticleMorph   = lazy(() => import('./components/ParticleMorph'));
-const Contact         = lazy(() => import('./components/Contact'));
-const Footer          = lazy(() => import('./components/Footer'));
+const ScrollTicker = lazy(() => import('./components/ScrollTicker'));
+const StatsBar     = lazy(() => import('./components/StatsBar'));
+const About        = lazy(() => import('./components/About'));
+const Projects     = lazy(() => import('./components/Projects'));
+const TechStack    = lazy(() => import('./components/TechStack'));
+const Contact      = lazy(() => import('./components/Contact'));
+const Footer       = lazy(() => import('./components/Footer'));
 
 const SectionSkeleton = () => <SkeletonLoader height="300px" borderRadius="0" />;
 
@@ -49,7 +46,6 @@ function AppInner() {
       <ScrollJourney />
       <ScrollProgress />
       <CustomCursor />
-      {/* <RibbonCursor /> - disabled */}
       <CookieBanner />
       <BgBot />
       <CursorBot />
@@ -64,8 +60,6 @@ function AppInner() {
             <About />
             <Projects />
             <TechStack />
-            <ParticleGalaxy />
-            <ParticleMorph />
             <Contact />
           </Suspense>
         </main>
